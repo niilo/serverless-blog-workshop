@@ -19,8 +19,9 @@ npm install -g serverless
 npm install
 ```
 
-* Open s-project.json file in root directory and replace 
+* Initialize project and follow instructions 
 ```json 
-"name": "aws-serverless-hackathon" 
+serverless project init 
 ``` 
-with yours project name or use default value
+
+#### Enjoy, your ready to go!
