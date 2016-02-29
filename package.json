@@ -1,0 +1,16 @@
+{
+  "name": "AWS - Serverless hackathon 2016 - Backend",
+  "version": "1.0.0",
+  "description": "AWS - Serverless hackathon 2016",
+  "author": "Alex Kozlov <alex.kozlov@sc5.io>",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:SC5/aws-serverless-hackathon-backend.git"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.2.39",
+    "serverless-helpers-js": "^0.1.0"
+  }
+}
