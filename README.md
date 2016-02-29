@@ -24,4 +24,9 @@ npm install
 serverless project init 
 ``` 
 
+* Delpoy your's lambdas and enpoints
+```bash
+serverless dash deploy
+```
+
 #### Enjoy, your ready to go!
