@@ -3,13 +3,13 @@
 var table = 'kozloals-hackathon-blog-dev',
     AWS = require('aws-sdk'),
     config = {
-        region: 'eu-west-1' // process.env.AWS_REGION
+        region: AWS.config.region // replace with yours region for local testing, e.g 'eu-west-1'
     },
     dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
-module.exports = { 
+module.exports = {
     // Get all posts
-    // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property  
+    // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
     getPosts: function(cb) {
         var params = {
             TableName: table,
@@ -20,12 +20,12 @@ module.exports = {
                 'date'
             ]
         };
-        
+
         dynamodb.scan(params, function (error, response) {
             return cb(error, response);
         });
     },
-    
+
     // Add new or edit post
     // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
     addPost: function (item, cb) {
@@ -33,7 +33,7 @@ module.exports = {
             TableName: table,
             Item: item
          }
-         
+
          dynamodb.put(params, function (error, response) {
              if (!error) {
                 response = {
@@ -43,7 +43,7 @@ module.exports = {
              return cb(error, response);
          });
     },
-    
+
     // Delete post
     // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
     deletePost: function (id, cb) {
@@ -51,7 +51,7 @@ module.exports = {
             TableName: table,
             Key: id
          }
-         
+
          dynamodb.delete(params, function (error, response) {
              if (!error) {
                 response = {
@@ -60,5 +60,5 @@ module.exports = {
              }
              return cb(error, response);
          });
-    }    
+    }
 }
