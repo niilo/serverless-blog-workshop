@@ -7,7 +7,11 @@
   "memorySize": 128,
   "custom": {
     "excludePatterns": [],
-    "envVars": []
+    "envVars": [],
+    "cors": {
+        "allowOrigin": "*",
+        "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
+    }
   },
   "endpoints": [
     {
@@ -23,19 +27,11 @@
       "responses": {
         "400": {
           "statusCode": "400",
-          "responseParameters": {
-            "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control'",
-            "method.response.header.Access-Control-Allow-Methods": "'*'",
-            "method.response.header.Access-Control-Allow-Origin": "'*'"
-          }
+          "responseParameters": {}
         },
         "default": {
           "statusCode": "200",
-          "responseParameters": {
-            "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control'",
-            "method.response.header.Access-Control-Allow-Methods": "'*'",
-            "method.response.header.Access-Control-Allow-Origin": "'*'"
-          },
+          "responseParameters": {},
           "responseModels": {},
           "responseTemplates": {
             "application/json": ""

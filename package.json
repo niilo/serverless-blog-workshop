@@ -1,5 +1,5 @@
 {
-  "name": "AWS - Serverless hackathon 2016 - Backend",
+  "name": "aws-serverless-hackathon-4j4gbr",
   "version": "1.0.0",
   "description": "AWS - Serverless hackathon 2016",
   "author": "Alex Kozlov <alex.kozlov@sc5.io>",
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "aws-sdk": "^2.2.39",
+    "dotenv": "^2.0.0",
+    "serverless-cors-plugin": "^0.3.1",
     "serverless-helpers-js": "^0.1.0"
   }
 }

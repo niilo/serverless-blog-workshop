@@ -1,10 +1,12 @@
 {
-  "name": "aws-serverless-hackathon",
+  "name": "aws-serverless-hackathon-4j4gbr",
   "version": "1.0.0",
   "profile": "serverless-v0.4.2",
   "location": "https://github.com/...",
   "author": "Alex Kozlov <alex.kozlov@sc5.io>",
   "description": "AWS - Serverless hackathon 2016",
   "custom": {},
-  "plugins": []
+  "plugins": [
+    "serverless-cors-plugin"
+  ]
 }
