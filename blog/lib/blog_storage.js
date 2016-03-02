@@ -10,8 +10,6 @@ var table = [
     },
     dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
-console.log('Table name:' + table);
-
 module.exports = {
     
     // Get all posts
@@ -34,7 +32,7 @@ module.exports = {
 
     // Add new or edit post
     // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-    addPost: function (item, cb) {
+    savePost: function (item, cb) {
          var params = {
             TableName: table,
             Item: item
@@ -55,7 +53,7 @@ module.exports = {
     deletePost: function (id, cb) {
          var params = {
             TableName: table,
-            Key: id
+            Key: {id: id}
          }
 
          dynamodb.delete(params, function (error, response) {

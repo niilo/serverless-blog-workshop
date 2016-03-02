@@ -3,11 +3,11 @@
 // Require Serverless ENV vars
 var ServerlessHelpers = require('serverless-helpers-js').loadEnv();
 
-var dynamodb = require('../lib/dynamodb');
+var dynamodb = require('../lib/blog_storage');
 
 // Lambda Handler
 module.exports.handler = function(event, context) {
-    dynamodb.deletePost(event, function(error, response) {
+    dynamodb.deletePost(event.id, function(error, response) {
         return context.done(error, response);
     });
 };
