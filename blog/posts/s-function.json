@@ -7,7 +7,11 @@
   "memorySize": 1024,
   "custom": {
     "excludePatterns": [],
-    "envVars": []
+    "envVars": [],
+    "cors": {
+        "allowOrigin": "*",
+        "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
+    }
   },
   "endpoints": [
     {

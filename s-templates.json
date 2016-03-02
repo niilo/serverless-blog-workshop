@@ -1,8 +1,7 @@
 {
   "restGet": {
     "application/json": {
-      "method": "$context.httpMethod", 
-      "foo":"bar"
+      "method": "$context.httpMethod"
     }
   },
   "restPost": {
