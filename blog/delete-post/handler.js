@@ -1,5 +1,8 @@
 'use strict';
 
+// Require Serverless ENV vars
+var ServerlessHelpers = require('serverless-helpers-js').loadEnv();
+
 var dynamodb = require('../lib/dynamodb');
 
 // Lambda Handler

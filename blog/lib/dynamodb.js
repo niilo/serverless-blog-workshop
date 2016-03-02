@@ -1,13 +1,19 @@
 'use strict';
 
-var table = 'kozloals-hackathon-blog-dev',
+var table = [
+        process.env.SERVERLESS_DATA_MODEL_STAGE ,
+        'blog'
+    ].join('-'),
     AWS = require('aws-sdk'),
     config = {
-        region: AWS.config.region // replace with yours region for local testing, e.g 'eu-west-1'
+        region: AWS.config.region || 'us-east-1' // replace with yours region for local testing, e.g 'eu-west-1'
     },
     dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
+console.log('Table name:' + table);
+
 module.exports = {
+    
     // Get all posts
     // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
     getPosts: function(cb) {
