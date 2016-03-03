@@ -19,14 +19,19 @@ npm install -g serverless
 npm install
 ```
 
-* Initialize project and follow instructions 
-```json 
-serverless project init 
-``` 
+* Initialize project and follow instructions
+```json
+serverless project init
+```
 
 * Delpoy your's lambdas and enpoints
 ```bash
 serverless dash deploy
+```
+or
+```bash
+serverless function deploy --all
+serverless endpoint deploy --all
 ```
 
 #### Enjoy, your ready to go!

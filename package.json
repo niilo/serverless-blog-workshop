@@ -1,18 +1,30 @@
 {
-  "name": "aws-serverless-hackathon-4j4gbr",
+  "name": "aws-serverless-hackathon",
   "version": "1.0.0",
   "description": "AWS - Serverless hackathon 2016",
-  "author": "Alex Kozlov <alex.kozlov@sc5.io>",
+  "keywords": [
+    "aws",
+    "jaws",
+    "serverless",
+    "hackathon",
+    "sc5"
+  ],
+  "author": "SC5 <info@sc5.io>",
   "license": "MIT",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:SC5/aws-serverless-hackathon-backend.git"
   },
+  "bugs": {
+    "url": "https://github.com/SC5/aws-serverless-hackathon-backend/issues"
+  },
+  "homepage": "https://github.com/SC5/aws-serverless-hackathon-backend#readme",
   "dependencies": {
-    "aws-sdk": "^2.2.39",
-    "dotenv": "^2.0.0",
     "serverless-cors-plugin": "^0.3.1",
     "serverless-helpers-js": "^0.1.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.2.40"
   }
 }
