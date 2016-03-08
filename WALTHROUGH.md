@@ -13,7 +13,7 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
 ```
 	> aws configure
 ``` 
- * Node 5 installed and in use
+ * Node 4 or 5 installed and in use
 ```
 	> nvm install 4
 ```
