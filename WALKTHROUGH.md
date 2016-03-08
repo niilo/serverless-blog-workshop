@@ -7,16 +7,10 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
 
 ## Prerequisites
 
- * AWS account 
+ * AWS account (register at https://aws.amazon.com/free)
  * AWS account key + secret
- * AWS profile set up on laptop (e.g. Using AWS CLI)
-```
-	> aws configure
-``` 
- * Node 4 or 5 installed and in use
-```
-	> nvm install 4
-```
+ * AWS profile set up on laptop (see http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)
+ * Node 4 or 5 installed (latest stable release available from https://nodejs.org/en/download/stable/)
  * Serverless framework installed
 ```
 	> npm install –g serverless
