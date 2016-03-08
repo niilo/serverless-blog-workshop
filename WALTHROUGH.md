@@ -82,7 +82,7 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
  5. Update mapping for GET and add endpoints POST, PUT and DELETE to the file 'blog/posts/s-function.json',
  use the mappings defined in s-templates.json (in project root) in 'endpoints'. See example below 
  (copy the GET method and modify method and requestTemplates for each of the other methods and set path for PUT/DELETE to posts/{id})
- ```
+```
     {
         "path": "posts",
         "method": "POST",
@@ -105,14 +105,14 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
             }
         }
     }
- ```
+```
  6. Enable CORS headers for the function by adding the following to 'blog/posts/s-function.json' into 'custom'
- ```
+```
     "cors": {
         "allowOrigin": "*",
         "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
     }
- ``` 
+``` 
  7. Implement the logic for the API to e.g. 'blog/lib/index.js'. It is recommended to use AWS.DynamoDB.DocumentClient from the aws-sdk for the Dynamo DB connection. 
     Remember to set the region when instantiating DynamoDB. The mappings restGet, restPost, restPut and restDelete map
      - the method (GET, POST, PUT, DELETE) to event.method
