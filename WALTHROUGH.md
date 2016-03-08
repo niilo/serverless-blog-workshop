@@ -74,12 +74,15 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
     
     > sls resources deploy
 ```
- 4. Add a serverless component 'blog' and function 'posts' for the endpoint
+
+## Creating the function and endpoint
+
+ 1. Add a serverless component 'blog' and function 'posts' for the endpoint
 ```
     > sls component create blog
     > sls function create blog/posts
 ```   
- 5. Update mapping for GET and add endpoints POST, PUT and DELETE to the file 'blog/posts/s-function.json',
+ 2. Update mapping for GET and add endpoints POST, PUT and DELETE to the file 'blog/posts/s-function.json',
  use the mappings defined in s-templates.json (in project root) in 'endpoints'. See example below 
  (copy the GET method and modify method and requestTemplates for each of the other methods and set path for PUT/DELETE to posts/{id})
 ```
@@ -106,19 +109,19 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
         }
     }
 ```
- 6. Enable CORS headers for the function by adding the following to 'blog/posts/s-function.json' into 'custom'
+ 3. Enable CORS headers for the function by adding the following to 'blog/posts/s-function.json' into 'custom'
 ```
     "cors": {
         "allowOrigin": "*",
         "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
     }
 ``` 
- 7. Implement the logic for the API to e.g. 'blog/lib/index.js'. It is recommended to use AWS.DynamoDB.DocumentClient from the aws-sdk for the Dynamo DB connection. 
+ 4. Implement the logic for the API to e.g. 'blog/lib/index.js'. It is recommended to use AWS.DynamoDB.DocumentClient from the aws-sdk for the Dynamo DB connection. 
     Remember to set the region when instantiating DynamoDB. The mappings restGet, restPost, restPut and restDelete map
      - the method (GET, POST, PUT, DELETE) to event.method
      - the JSON payload (for POST / PUT) is mapped to event.body 
      - the id (for PUT/DELETE) is mapped to event.id
- 8. Setup event.json to test the endpoint for creating a new post and run it using sls function run
+ 5. Setup event.json to test the endpoint for creating a new post and run it using sls function run
 ```
     event.json:
     {
@@ -131,11 +134,13 @@ A reference implementation is available at https://github.com/SC5/aws-serverless
     
     > sls function run blog/posts
 ```
- 8. Deploy the function and endpoint
+ 6. Deploy the function and endpoint
 ```
     > sls function deploy blog/posts
     > sls endpoint deploy --all    (this deploys also the CORS headers)
 ```
- 9. Launch the blog application at http://hackathon-blog.sandbox.sc5.io/ and insert the endpoint URL from the output of the 
+
+## Using the endpoint in the sample app
+ 1. Launch the blog application at http://hackathon-blog.sandbox.sc5.io/ and insert the endpoint URL from the output of the 
   previous command (https://....amazonaws.com/dev/posts) as the endpoint URL and save the settings
- 10. Congrats, you did it!
+ 2. Congrats, you did it!
