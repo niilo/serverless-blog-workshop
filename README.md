@@ -35,3 +35,6 @@ serverless endpoint deploy --all
 ```
 
 #### Enjoy, your ready to go!
+
+# Feedback
+mikael.puittinen@sc5.io
