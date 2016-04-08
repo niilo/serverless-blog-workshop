@@ -1,4 +1,8 @@
-#[BACKEND] AWS - Serverless hackathon 2016
+# AWS - Serverless hackathon 2016
+
+Example backend project for AWS - Serverless hackathon.
+
+Project is compatible with Serverless v.0.5.3+.
 
 * Clone git repository
 ```bash

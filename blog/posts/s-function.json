@@ -1,13 +1,24 @@
 {
   "name": "posts",
+  "runtime": "nodejs4.3",
+  "description": "Lambda Function for ${project} - ${stage}",
   "customName": false,
   "customRole": false,
   "handler": "posts/handler.handler",
-  "timeout": 3,
-  "memorySize": 128,
+  "timeout": 30,
+  "memorySize": 512,
+  "authorizer": {},
   "custom": {
     "excludePatterns": [],
-    "envVars": []
+    "cors": {
+      "allowOrigin": "*",
+      "allowHeaders": [
+        "Content-Type",
+        "X-Amz-Date",
+        "Authorization",
+        "X-Api-Key"
+      ]
+    }
   },
   "endpoints": [
     {
@@ -15,6 +26,7 @@
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${restGet}",
@@ -37,6 +49,7 @@
       "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${restPost}",
@@ -59,6 +72,7 @@
       "method": "PUT",
       "type": "AWS",
       "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${restPut}",
@@ -81,6 +95,7 @@
       "method": "DELETE",
       "type": "AWS",
       "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": "$${restDelete}",
@@ -99,5 +114,14 @@
       }
     }
   ],
-  "events": []
+  "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}"
+  },
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
 }
