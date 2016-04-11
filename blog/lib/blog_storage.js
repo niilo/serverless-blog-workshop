@@ -36,7 +36,7 @@ module.exports = {
     let params = {
       TableName: table,
       Item: item
-    }
+    };
 
     dynamodb.put(params, (error, response) => {
       if (!error) {
@@ -54,7 +54,7 @@ module.exports = {
     let params = {
       TableName: table,
       Key: {id: id}
-    }
+    };
 
     dynamodb.delete(params, (error, response) => {
       if (!error) {
@@ -65,4 +65,4 @@ module.exports = {
       return cb(error, response);
     });
   }
-}
+};
