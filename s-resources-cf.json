@@ -58,7 +58,7 @@
         ]
       }
     },
-    "Dynamo": {
+    "BlogTable": {
         "Type": "AWS::DynamoDB::Table",
         "DeletionPolicy": "Retain",
         "Properties": {
