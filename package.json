@@ -1,6 +1,6 @@
 {
   "name": "aws-serverless-hackathon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AWS - Serverless hackathon 2016",
   "keywords": [
     "aws",
@@ -10,6 +10,11 @@
     "sc5"
   ],
   "author": "SC5 <info@sc5.io>",
+  "contributors": [
+    "Mikael Puittinen (https://sc5.io)",
+    "Alex Kozlov (https://sc5.io)",
+    "Eetu Tuomala (https://sc5.io)"
+  ],
   "license": "MIT",
   "private": true,
   "repository": {
@@ -21,10 +26,9 @@
   },
   "homepage": "https://github.com/SC5/aws-serverless-hackathon-backend#readme",
   "dependencies": {
-    "serverless-cors-plugin": "^0.3.1",
-    "serverless-helpers-js": "^0.1.0"
+    "serverless-cors-plugin": "^0.4.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.2.40"
+    "aws-sdk": "^2.2.48"
   }
 }
