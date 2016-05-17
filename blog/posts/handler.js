@@ -1,6 +1,6 @@
 'use strict';
 
-var blog = require('./blog-storage');
+var blog = require('./blog_storage');
 
 module.exports.handler = function(event, context, cb) {
     var post;
