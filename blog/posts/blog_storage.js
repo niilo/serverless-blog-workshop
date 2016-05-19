@@ -1,7 +1,7 @@
 'use strict';
 
 let table = [
-    process.env.SERVERLESS_DATA_MODEL_STAGE,
+    process.env.SERVERLESS_STAGE,
     'blog'
   ].join('-'),
   AWS = require('aws-sdk'),
