@@ -41,7 +41,7 @@ module.exports = {
     dynamodb.put(params, (error, response) => {
       if (!error) {
         response = {
-          message: "Success!"
+          post: item
         };
       }
       return cb(error, response);
@@ -59,7 +59,7 @@ module.exports = {
     dynamodb.delete(params, (error, response) => {
       if (!error) {
         response = {
-          message: "Successfully deleted!"
+          deleted: id
         };
       }
       return cb(error, response);
