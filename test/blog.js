@@ -12,20 +12,21 @@ const liveFunction = {
   lambdaFunction: process.env.SERVERLESS_PROJECT + '-handler'
 }
 
-//  wrapper.init(liveFunction); // Run the deployed lambda 
+//  wrapper.init(liveFunction); // Run the deployed lambda
 wrapper.init(mod, {
   handler: 'handler'
 });
 
 describe('blog', () => {
   let postId;
-  
+
   it('creates a post', (done) => {
-    wrapper.run({ 
-        "method": "POST", 
-        "body": { 
-          "title": "Test post", 
-          "content" : "Test content" 
+    wrapper.run({
+        "method": "POST",
+        "stage": "dev",
+        "body": {
+          "title": "Test post",
+          "content" : "Test content"
         }
     }, (err, response) => {
       expect(err).to.be.null;
@@ -36,33 +37,35 @@ describe('blog', () => {
   });
 
   it('reads posts', (done) => {
-    wrapper.run({ 
-        "method": "GET"
+    wrapper.run({
+        "method": "GET",
+        "stage": "dev",
     }, (err, response) => {
       expect(err).to.be.null;
       expect(response.Items).to.be.not.null;
       expect(response.Items.length > 0).to.be.true;
       // find our post
       let post = false;
-      for (let idx in response.Items.length) {
+      for (let idx in response.Items) {
         if (response.Items[idx].id == postId) {
-          post = response.items[idx];
+          post = response.Items[idx];
         }
       }
       expect(post).to.not.be.false;
       expect(post.title).to.be.equal("Test post");
-      expect(content).to.be.equal("Test content");
+      expect(post.content).to.be.equal("Test content");
       done();
     });
   });
 
   it('updates a post', (done) => {
-    wrapper.run({ 
+    wrapper.run({
         "method": "PUT",
-        "id": postId, 
-        "body": { 
-          "title": "Test post updated", 
-          "content" : "Test content updated" 
+        "stage": "dev",
+        "id": postId,
+        "body": {
+          "title": "Test post updated",
+          "content" : "Test content updated"
         }
     }, (err, response) => {
       expect(err).to.be.null;
@@ -71,10 +74,11 @@ describe('blog', () => {
       done();
     });
   });
-  
+
   it('deletes a post', (done) => {
-    wrapper.run({ 
-        "method": "DELETE", 
+    wrapper.run({
+        "method": "DELETE",
+        "stage": "dev",
         "id": postId
     }, (err, response) => {
       expect(err).to.be.null;
