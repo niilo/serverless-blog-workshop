@@ -62,7 +62,9 @@ describe('blog', () => {
     wrapper.run({
         "method": "PUT",
         "stage": "dev",
-        "id": postId,
+        "path": {
+          "id": postId,
+        },
         "body": {
           "title": "Test post updated",
           "content" : "Test content updated"
@@ -79,7 +81,9 @@ describe('blog', () => {
     wrapper.run({
         "method": "DELETE",
         "stage": "dev",
-        "id": postId
+        "path": {
+          "id": postId,
+        },
     }, (err, response) => {
       expect(err).to.be.null;
       done();
