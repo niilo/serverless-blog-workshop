@@ -74,3 +74,8 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: dev-blog
+
+plugins:
+#  - serverless-cors-plugin
+  - serverless-mocha-plugin
+#  - serverless-dynamodb-local
