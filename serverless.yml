@@ -91,6 +91,5 @@ resources:
           - Ref: IamRoleLambda
 
 plugins:
-#  - serverless-cors-plugin
   - serverless-mocha-plugin
 #  - serverless-dynamodb-local
