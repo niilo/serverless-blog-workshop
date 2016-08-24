@@ -41,6 +41,20 @@ functions:
       - http:
           path: posts
           method: get
+          cors: true
+      - http:
+          path: posts
+          method: post
+          cors: true
+      - http:
+          path: posts/{id}
+          method: put
+          cors: true
+      - http:
+          path: posts/{id}
+          method: delete
+          cors: true
+
 #     - s3: ${bucket}
 #     - schedule: rate(10 minutes)
 #     - sns: greeter-topic
