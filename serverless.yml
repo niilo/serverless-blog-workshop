@@ -73,7 +73,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: dev-v1-tapio-blog
+        TableName: dev-blog
     IamPolicyLambda:
       Type: AWS::IAM::Policy
       Properties:
@@ -90,6 +90,7 @@ resources:
         Roles:
           - Ref: IamRoleLambda
 
-#plugins:
-  #- serverless-cors-plugin
-  #- serverless-mocha-plugin
+plugins:
+#  - serverless-cors-plugin
+  - serverless-mocha-plugin
+#  - serverless-dynamodb-local
