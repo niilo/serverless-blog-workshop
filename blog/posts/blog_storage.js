@@ -1,10 +1,6 @@
 'use strict';
 
-// let tablePostfix = [
-//     process.env.SERVERLESS_STAGE,
-//     'blog'
-//   ].join('-'),
-let tablePostfix = '-blog-tapio-aws-serverless-hackathon',
+const tablePostfix = '-blog-aws-serverless-hackathon',
   AWS = require('aws-sdk'),
   config = {
     region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1' // replace with yours region for local testing, e.g 'eu-west-1'
@@ -34,6 +30,7 @@ module.exports = {
   // Add new or edit post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
   savePost: (event, cb) => {
+    // If PUT request, set Id from path to object
     if(event.path && event.path.id) {
       event.body.id = event.path.id;
     }

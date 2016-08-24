@@ -87,11 +87,11 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: dev-blog-${serviceName}
+        TableName: dev-${serviceName}
     IamPolicyLambda:
       Type: AWS::IAM::Policy
       Properties:
-        PolicyName: dev-tapio-aws-serverless-hackathon-lambda
+        PolicyName: dev-aws-serverless-hackathon-lambda
         PolicyDocument:
           Version: "2012-10-17"
           Statement:
