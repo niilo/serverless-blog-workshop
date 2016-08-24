@@ -106,4 +106,3 @@ resources:
 
 plugins:
   - serverless-mocha-plugin
-#  - serverless-dynamodb-local
