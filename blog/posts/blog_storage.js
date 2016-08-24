@@ -1,13 +1,13 @@
 'use strict';
 
-// let table = [
+// let tablePostfix = [
 //     process.env.SERVERLESS_STAGE,
 //     'blog'
 //   ].join('-'),
-let table = 'dev-v1-tapio-blog',
+let tablePostfix = '-blog-tapio-aws-serverless-hackathon',
   AWS = require('aws-sdk'),
   config = {
-    region: AWS.config.region || process.env.SERVERLESS_REGION || 'us-east-1' // replace with yours region for local testing, e.g 'eu-west-1'
+    region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1' // replace with yours region for local testing, e.g 'eu-west-1'
   },
   dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
@@ -15,9 +15,9 @@ module.exports = {
 
   // Get all posts
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
-  getPosts: (cb) => {
+  getPosts: (event, cb) => {
     let params = {
-      TableName: table,
+      TableName: event.stage + tablePostfix,
       AttributesToGet: [
         'id',
         'title',
@@ -33,16 +33,19 @@ module.exports = {
 
   // Add new or edit post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-  savePost: (item, cb) => {
+  savePost: (event, cb) => {
+    if(event.id) {
+      event.body.id = event.id;
+    }
     let params = {
-      TableName: table,
-      Item: item
+      TableName: event.stage + tablePostfix,
+      Item: event.body
     };
 
     dynamodb.put(params, (error, response) => {
       if (!error) {
         response = {
-          post: item
+          post: event.body
         };
       }
       return cb(error, response);
@@ -51,16 +54,16 @@ module.exports = {
 
   // Delete post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
-  deletePost: (id, cb) => {
+  deletePost: (event, cb) => {
     let params = {
-      TableName: table,
-      Key: {id: id}
+      TableName: event.stage + tablePostfix,
+      Key: {id: event.id}
     };
 
     dynamodb.delete(params, (error, response) => {
       if (!error) {
         response = {
-          deleted: id
+          deleted: event.id
         };
       }
       return cb(error, response);
