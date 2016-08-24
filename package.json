@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/SC5/aws-serverless-hackathon-backend#readme",
   "dependencies": {
-    "serverless-cors-plugin": "^0.4.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.2.48",

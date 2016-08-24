@@ -33,13 +33,13 @@ defaults:
 #  artifact: my-service-code.zip
 
 functions:
-  hello:
-    handler: handler.hello
+  blog:
+    handler: blog/posts/handler.handler
 
 #   you can add any of the following events
     events:
       - http:
-          path: v1hello
+          path: posts
           method: get
 #     - s3: ${bucket}
 #     - schedule: rate(10 minutes)
@@ -73,4 +73,23 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: dev-blog
+        TableName: dev-v1-tapio-blog
+    IamPolicyLambda:
+      Type: AWS::IAM::Policy
+      Properties:
+        PolicyName: dev-tapio-aws-serverless-hackathon-lambda
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            # - Effect: Allow
+            #   Action: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+            #   Resource: ["arn:aws:logs:${region}:*:*"]
+            - Effect: Allow
+              Action: ["dynamodb:Scan"]
+              Resource: arn:aws:dynamodb:${region}:*:*
+        Roles:
+          - Ref: IamRoleLambda
+
+#plugins:
+  #- serverless-cors-plugin
+  #- serverless-mocha-plugin
