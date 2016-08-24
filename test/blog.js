@@ -17,7 +17,7 @@ wrapper.init(mod, {
   handler: 'handler'
 });
 
-describe('posts', () => {
+describe('blog', () => {
   let postId;
   
   it('creates a post', (done) => {
@@ -31,6 +31,27 @@ describe('posts', () => {
       expect(err).to.be.null;
       postId = response.post.id;
       expect(response.post.id).to.be.not.null;
+      done();
+    });
+  });
+
+  it('reads posts', (done) => {
+    wrapper.run({ 
+        "method": "GET"
+    }, (err, response) => {
+      expect(err).to.be.null;
+      expect(response.Items).to.be.not.null;
+      expect(response.Items.length > 0).to.be.true;
+      // find our post
+      let post = false;
+      for (let idx in response.Items.length) {
+        if (response.Items[idx].id == postId) {
+          post = response.items[idx];
+        }
+      }
+      expect(post).to.not.be.false;
+      expect(post.title).to.be.equal("Test post");
+      expect(content).to.be.equal("Test content");
       done();
     });
   });
