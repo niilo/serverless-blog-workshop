@@ -1,7 +1,0 @@
-{
-  "name": "aws-serverless-hackathon",
-  "custom": {},
-  "plugins": [
-    "serverless-cors-plugin"
-  ]
-}
