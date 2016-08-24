@@ -34,8 +34,8 @@ module.exports = {
   // Add new or edit post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
   savePost: (event, cb) => {
-    if(event.id) {
-      event.body.id = event.id;
+    if(event.path && event.path.id) {
+      event.body.id = event.path.id;
     }
     let params = {
       TableName: event.stage + tablePostfix,
@@ -57,7 +57,7 @@ module.exports = {
   deletePost: (event, cb) => {
     let params = {
       TableName: event.stage + tablePostfix,
-      Key: {id: event.id}
+      Key: {id: event.path.id}
     };
 
     dynamodb.delete(params, (error, response) => {
