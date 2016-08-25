@@ -14,28 +14,28 @@ defaults:
 
 functions:
   createPost:
-    handler: blog/posts/handler.create
+    handler: blog/posts/handler.createPost
     events:
       - http:
           path: posts/create
           method: post
           cors: true
   getPosts:
-    handler: blog/posts/handler.get
+    handler: blog/posts/handler.getPosts
     events:
       - http:
           path: posts
           method: get
           cors: true
   updatePost:
-    handler: blog/posts/handler.update
+    handler: blog/posts/handler.updatePost
     events:
       - http:
           path: posts/{id}/update
           method: put
           cors: true
   removePost:
-    handler: blog/posts/handler.remove
+    handler: blog/posts/handler.removePost
     events:
       - http:
           path: posts/{id}/delete

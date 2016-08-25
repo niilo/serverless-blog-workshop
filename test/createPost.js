@@ -27,11 +27,7 @@ describe('API create', () => {
           "content" : "Test content"
         }
     }, (err, response) => {
-      done();
-      return;
-      console.trace(response);
-      expect(err).to.be.null;
-      expect(response.post.id).to.be.not.null;
+      expect('to be implemented').to.be.null;
       done();
     });
   });
