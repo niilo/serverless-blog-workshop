@@ -1,20 +1,17 @@
 const blog = require('./blog_storage');
 
-module.exports.handler = function handler(event, context, cb) {
-  switch (event.method) {
-    case 'GET':
-      blog.getPosts(event, cb);
-      break;
-    case 'POST':
-      blog.savePost(event, cb);
-      break;
-    case 'PUT':
-      blog.savePost(event, cb);
-      break;
-    case 'DELETE':
-      blog.deletePost(event, cb);
-      break;
-    default:
-      cb(`not yet implemented ${event.method}`);
-  }
-};
+module.exports.create = function createPost(event, context, cb) {
+  blog.savePost(event, cb);
+}
+
+module.exports.get = function getPosts(event, context, cb) {
+  blog.getPosts(event, cb);
+}
+
+module.exports.update = function updatePost(event, context, cb) {
+  blog.savePost(event, cb);
+}
+
+module.exports.remove = function removePost(event, context, cb) {
+  blog.deletePost(event, cb);
+}
