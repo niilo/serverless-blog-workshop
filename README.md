@@ -30,12 +30,7 @@ serverless project init
 
 * Delpoy your's lambdas and enpoints
 ```bash
-serverless dash deploy
-```
-or
-```bash
-serverless function deploy --all
-serverless endpoint deploy --all
+serverless deploy
 ```
 
 #### Enjoy, your ready to go!
