@@ -15,6 +15,6 @@ module.exports.handler = function handler(event, context, cb) {
       blog.deletePost(event, cb);
       break;
     default:
-      cb(`not yet implemented ${event.method}`);
+      cb(`Invalid method ${event.method}`);
   }
 };
