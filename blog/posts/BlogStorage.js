@@ -11,7 +11,7 @@ class BlogStorage {
 
   // Get all posts
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
-  getPosts(event, cb) {
+  getPosts(query, cb) {
     const params = Object.assign({}, this.baseParams, {
       AttributesToGet: [
         'id',
@@ -26,8 +26,7 @@ class BlogStorage {
 
   // Add new post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-  savePost(event, cb) {
-    const post = event.body;
+  savePost(post, cb) {
     post.id = Date.now().toString();
 
     const params = Object.assign({}, this.baseParams, { Item: post });
@@ -42,9 +41,8 @@ class BlogStorage {
 
   // Edit post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
-  updatePost(event, cb) {
-    const post = event.body;
-    post.id = event.path.id;
+  updatePost(id, post, cb) {
+    post.id = id;
 
     const params = Object.assign({}, this.baseParams, { Item: post });
 
@@ -58,14 +56,14 @@ class BlogStorage {
 
   // Delete post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
-  deletePost(event, cb) {
+  deletePost(id, cb) {
     const params = Object.assign({}, this.baseParams,
-      { Key: { id: event.path.id } }
+      { Key: { id: id } }
     );
 
     this.dynamodb.delete(params, (error, response) => {
       if (!error) {
-        return cb(null, { post: event.id });
+        return cb(null, { post: id });
       }
       return cb(error, response);
     });
