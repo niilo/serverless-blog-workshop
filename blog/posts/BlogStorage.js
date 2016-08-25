@@ -58,7 +58,7 @@ class BlogStorage {
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
   deletePost(id, cb) {
     const params = Object.assign({}, this.baseParams,
-      { Key: { id: id } }
+      { Key: { id } }
     );
 
     this.dynamodb.delete(params, (error, response) => {

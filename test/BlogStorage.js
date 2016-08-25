@@ -1,9 +1,8 @@
 'use strict';
 // Tests for Blog Storage
 
-const BlogStorage = require('../blog/posts/BlogStorage.js');
-const mocha       = require('mocha');
-const expect      = require('chai').expect;
+const BlogStorage = require('../blog/posts/BlogStorage');
+const expect = require('chai').expect;
 
 // Set up our mock DynamoDB class
 class MockDynamoDB {
@@ -12,24 +11,14 @@ class MockDynamoDB {
   }
 
   put(params, cb) {
-    if (params.fail) {
-      cb(new Error('autofail'));
-      return;
-    }
-
     this.posts[params.Item.id] = params.Item;
     cb(null, params.Item);
   }
 
   scan(params, cb) {
-    if (params.fail) {
-      cb(new Error('autofail'));
-      return;
-    }
-
     // Compile the local hash as array
-    let posts = [];
-    for (let n in this.posts) {
+    const posts = [];
+    for (const n in this.posts) {
       posts.push(this.posts[n]);
     }
 
@@ -41,11 +30,6 @@ class MockDynamoDB {
   }
 
   delete(params, cb) {
-    if (params.fail) {
-      cb(new Error('autofail'));
-      return;
-    }
-
     delete this.posts[params.id];
     cb(null, {});
   }
