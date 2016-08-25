@@ -42,7 +42,7 @@ module.exports = {
 
     dynamodb.put(params, (error, response) => {
       if (!error) {
-        cb(null, { post });
+        return cb(null, { post });
       }
       return cb(error, response);
     });
@@ -58,7 +58,7 @@ module.exports = {
 
     dynamodb.delete(params, (error, response) => {
       if (!error) {
-        cb(null, { post: event.id });
+        return cb(null, { post: event.id });
       }
       return cb(error, response);
     });
