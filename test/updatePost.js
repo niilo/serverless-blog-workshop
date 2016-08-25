@@ -14,7 +14,7 @@ const liveFunction = {
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 wrapper.init(mod, {
-  handler: 'update'
+  handler: 'updatePost'
 });
 
 describe('API update', () => {
@@ -32,6 +32,7 @@ describe('API update', () => {
           "content" : "Test content updated"
         }
     }, (err, response) => {
+      expect(err).to.be.null;
       expect('to be implemented').to.be.null;
       done();
     });

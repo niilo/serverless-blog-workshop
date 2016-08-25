@@ -14,7 +14,7 @@ const liveFunction = {
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 wrapper.init(mod, {
-  handler: 'create'
+  handler: 'createPost'
 });
 
 describe('API create', () => {
@@ -27,6 +27,8 @@ describe('API create', () => {
           "content" : "Test content"
         }
     }, (err, response) => {
+      expect(err).to.be.null;
+      console.log(err, response);
       expect('to be implemented').to.be.null;
       done();
     });

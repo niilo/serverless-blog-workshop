@@ -14,7 +14,7 @@ const liveFunction = {
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 wrapper.init(mod, {
-  handler: 'get'
+  handler: 'getPosts'
 });
 
 describe('API get', () => {
@@ -25,6 +25,7 @@ describe('API get', () => {
         "method": "GET",
         "stage": "dev",
     }, (err, response) => {
+      expect(err).to.be.null;        
       expect('to be implemented').to.be.null;
       done();
     });

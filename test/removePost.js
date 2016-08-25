@@ -14,7 +14,7 @@ const liveFunction = {
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 wrapper.init(mod, {
-  handler: 'remove'
+  handler: 'removePost'
 });
 
 describe('API remove', () => {
@@ -28,6 +28,7 @@ describe('API remove', () => {
           "id": postId,
         },
     }, (err, response) => {
+      expect(err).to.be.null;      
       expect('to be implemented').to.be.null;
       done();
     });
