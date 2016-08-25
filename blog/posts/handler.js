@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports.handler = function(event, context, cb) {
+module.exports.handler = (event, context, cb) => {
 
     const blog = require('./blog_storage');
     let post;
@@ -11,7 +11,6 @@ module.exports.handler = function(event, context, cb) {
           blog.getPosts(event, cb);
           break;
       case 'POST':
-          event.body.id = Date.now().toString();
           blog.savePost(event, cb);
           break;
       case 'PUT':

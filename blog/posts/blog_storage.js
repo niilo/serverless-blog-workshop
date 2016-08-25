@@ -1,49 +1,48 @@
-'use strict';
+const AWS = require('aws-sdk');
 
-const tablePostfix = '-blog-aws-serverless-hackathon',
-  AWS = require('aws-sdk'),
-  config = {
-    region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1' // replace with yours region for local testing, e.g 'eu-west-1'
-  },
-  dynamodb = new AWS.DynamoDB.DocumentClient(config);
+const tablePostfix = '-blog-aws-serverless-hackathon';
+const config = {
+  region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1',
+};
+const dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
 module.exports = {
 
   // Get all posts
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
   getPosts: (event, cb) => {
-    let params = {
+    const params = {
       TableName: event.stage + tablePostfix,
       AttributesToGet: [
         'id',
         'title',
         'content',
-        'date'
-      ]
+        'date',
+      ],
     };
 
-    dynamodb.scan(params, (error, response) => {
-      return cb(error, response);
-    });
+    dynamodb.scan(params, (error, response) => cb(error, response));
   },
 
   // Add new or edit post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
   savePost: (event, cb) => {
+    const post = event.body;
     // If PUT request, set Id from path to object
-    if(event.path && event.path.id) {
-      event.body.id = event.path.id;
+    if (event.path && event.path.id) {
+      post.id = event.path.id;
+    } else {
+      post.id = Date.now().toString();
     }
-    let params = {
+
+    const params = {
       TableName: event.stage + tablePostfix,
-      Item: event.body
+      Item: post,
     };
 
     dynamodb.put(params, (error, response) => {
       if (!error) {
-        response = {
-          post: event.body
-        };
+        cb(null, { post });
       }
       return cb(error, response);
     });
@@ -52,18 +51,16 @@ module.exports = {
   // Delete post
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
   deletePost: (event, cb) => {
-    let params = {
+    const params = {
       TableName: event.stage + tablePostfix,
-      Key: {id: event.path.id}
+      Key: { id: event.path.id },
     };
 
     dynamodb.delete(params, (error, response) => {
       if (!error) {
-        response = {
-          deleted: event.id
-        };
+        cb(null, { post: event.id });
       }
       return cb(error, response);
     });
-  }
+  },
 };
