@@ -9,25 +9,36 @@ defaults:
   region: eu-west-1
   timeout: 3
   memory: 512
+  exclude:
+    - .git
 
 functions:
-  blog:
-    handler: blog/posts/handler.handler
+  createPost:
+    handler: blog/posts/handler.create
+    events:
+      - http:
+          path: posts/create
+          method: post
+          cors: true
+  getPosts:
+    handler: blog/posts/handler.get
     events:
       - http:
           path: posts
           method: get
           cors: true
+  updatePost:
+    handler: blog/posts/handler.update
+    events:
       - http:
-          path: posts
-          method: post
-          cors: true
-      - http:
-          path: posts/{id}
+          path: posts/{id}/update
           method: put
           cors: true
+  removePost:
+    handler: blog/posts/handler.remove
+    events:
       - http:
-          path: posts/{id}
+          path: posts/{id}/delete
           method: delete
           cors: true
 
