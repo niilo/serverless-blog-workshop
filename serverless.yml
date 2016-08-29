@@ -11,6 +11,7 @@ defaults:
   memory: 512
   exclude:
     - .git
+    - .eslintrc.js
 
 functions:
   createPost:

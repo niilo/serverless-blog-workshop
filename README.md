@@ -13,6 +13,7 @@ git clone git@github.com:SC5/aws-serverless-hackathon-backend.git
 ```bash
 cd "DIRECTORY_NAME"
 ```
+
 * Install serverless globally
 ```bash
 npm install -g serverless
@@ -23,17 +24,19 @@ npm install -g serverless
 npm install
 ```
 
-* Initialize project and follow instructions
-```json
-serverless project init
-```
+* It not already configured, configure your AWS provider credentials as described here: https://git.io/v64aN
 
-* Delpoy your's lambdas and enpoints
+* Delpoy your serverless service
 ```bash
 serverless deploy
 ```
 
-#### Enjoy, your ready to go!
+* Running tests
+```bash
+npm test
+```
+
+#### Enjoy, you're ready to go!
 
 # Feedback
 mikael.puittinen@sc5.io
