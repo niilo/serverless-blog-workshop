@@ -4,7 +4,7 @@
 
 const mod         = require('../blog/posts/handler.js');
 const mochaPlugin = require('serverless-mocha-plugin');
-const wrapper     = mochaPlugin.lambdaWrapper;
+const lambdaWrapper     = mochaPlugin.lambdaWrapper;
 const expect      = mochaPlugin.chai.expect;
 
 const liveFunction = {
@@ -13,20 +13,19 @@ const liveFunction = {
 }
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
-wrapper.init(mod, {
-  handler: 'getPosts'
-});
+const getPostsWrapped = lambdaWrapper.wrap(mod, { handler: 'getPosts' });
 
 describe('API get', () => {
   let postId;
 
   it('reads posts', (done) => {
-    wrapper.run({
+    getPostsWrapped.run({
         "method": "GET",
         "stage": "dev",
     }, (err, response) => {
-      expect(err).to.be.null;        
-      expect('to be implemented').to.be.null;
+      expect(err).to.be.null;
+      expect(response.Items).to.be.defined;
+      expect(response.Count).to.be.defined;
       done();
     });
   });

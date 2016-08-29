@@ -4,7 +4,7 @@
 
 const mod         = require('../blog/posts/handler.js');
 const mochaPlugin = require('serverless-mocha-plugin');
-const wrapper     = mochaPlugin.lambdaWrapper;
+const lambdaWrapper     = mochaPlugin.lambdaWrapper;
 const expect      = mochaPlugin.chai.expect;
 
 const liveFunction = {
@@ -13,13 +13,11 @@ const liveFunction = {
 }
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
-wrapper.init(mod, {
-  handler: 'createPost'
-});
+const createPostWrapped = lambdaWrapper.wrap(mod, { handler: 'createPost' });
 
 describe('API create', () => {
   it('creates a post', (done) => {
-    wrapper.run({
+    createPostWrapped.run({
         "method": "POST",
         "stage": "dev",
         "body": {
@@ -28,8 +26,9 @@ describe('API create', () => {
         }
     }, (err, response) => {
       expect(err).to.be.null;
-      console.log(err, response);
-      expect('to be implemented').to.be.null;
+      expect(response.post.id).to.not.to.be.null;
+      expect(response.post.title).to.equal("Test post");
+      expect(response.post.content).to.equal("Test content");
       done();
     });
   });
