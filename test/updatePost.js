@@ -10,8 +10,8 @@ const expect            = mochaPlugin.chai.expect;
 
 const liveFunction = {
   region: process.env.SERVERLESS_REGION,
-  lambdaFunction: process.env.SERVERLESS_PROJECT + '-handler'
-}
+  lambdaFunction: `${process.env.SERVERLESS_PROJECT}-handler`,
+};
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 const updatePostWrapped = lambdaWrapper.wrap(mod, { handler: 'updatePost' })

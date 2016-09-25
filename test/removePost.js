@@ -9,8 +9,8 @@ const expect             = mochaPlugin.chai.expect;
 
 const liveFunction = {
   region: process.env.SERVERLESS_REGION,
-  lambdaFunction: process.env.SERVERLESS_PROJECT + '-handler'
-}
+  lambdaFunction: `${process.env.SERVERLESS_PROJECT}-handler`,
+};
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 const removePostWrapped = lambdaWrapper.wrap(mod, { handler: 'removePost' });
@@ -19,10 +19,10 @@ describe('API remove', () => {
 
   it('deletes a post', (done) => {
     removePostWrapped.run({
-        "method": "DELETE",
-        "stage": "dev",
-        "path": {
-          "id": '1472459044212',
+        'method': 'DELETE',
+        'stage': 'dev',
+        'path': {
+          'id': '1472459044212',
         },
     }, (err, response) => {
       expect(err).to.be.null;

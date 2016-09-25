@@ -26,7 +26,7 @@ npm install
 
 * It not already configured, configure your AWS provider credentials as described here: https://git.io/v64aN
 
-* Delpoy your serverless service
+* Deploy your serverless service
 ```bash
 serverless deploy
 ```

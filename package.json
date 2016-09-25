@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/SC5/aws-serverless-hackathon-backend#readme",
   "dependencies": {
-    "aws-sdk": "^2.2.48"
   },
   "devDependencies": {
+    "aws-sdk": "^2.2.48",
     "chai": "^3.5.0",
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.0",

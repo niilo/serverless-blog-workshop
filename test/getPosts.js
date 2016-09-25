@@ -9,8 +9,8 @@ const expect      = mochaPlugin.chai.expect;
 
 const liveFunction = {
   region: process.env.SERVERLESS_REGION,
-  lambdaFunction: process.env.SERVERLESS_PROJECT + '-handler'
-}
+  lambdaFunction: `${process.env.SERVERLESS_PROJECT}-handler`,
+};
 
 //  wrapper.init(liveFunction); // Run the deployed lambda
 const getPostsWrapped = lambdaWrapper.wrap(mod, { handler: 'getPosts' });
@@ -20,8 +20,8 @@ describe('API get', () => {
 
   it('reads posts', (done) => {
     getPostsWrapped.run({
-        "method": "GET",
-        "stage": "dev",
+        'method': 'GET',
+        'stage': 'dev',
     }, (err, response) => {
       expect(err).to.be.null;
       expect(response.Items).to.be.defined;

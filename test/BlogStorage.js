@@ -66,8 +66,8 @@ describe('BlogStorage', () => {
         }
       }
       expect(post).to.not.be.false;
-      expect(post.title).to.be.equal("Test");
-      expect(post.content).to.be.equal("Hello, world!");
+      expect(post.title).to.be.equal('Test');
+      expect(post.content).to.be.equal('Hello, world!');
       done();
     });
   });
@@ -78,8 +78,8 @@ describe('BlogStorage', () => {
       content: 'Hello, Mocha!'
     }, (err, response) => {
       expect(err).to.be.null;
-      expect(response.post.title).to.be.equal("Updated Test");
-      expect(response.post.content).to.be.equal("Hello, Mocha!");
+      expect(response.post.title).to.be.equal('Updated Test');
+      expect(response.post.content).to.be.equal('Hello, Mocha!');
       done();
     });
   });
