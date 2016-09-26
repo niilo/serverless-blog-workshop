@@ -2,7 +2,7 @@
 
 Example backend project for AWS - Serverless hackathon.
 
-Project is compatible with Serverless v.0.5.3+.
+Project is compatible with Serverless v.1.0.0-beta.2
 
 * Clone git repository
 ```bash
@@ -13,6 +13,7 @@ git clone git@github.com:SC5/aws-serverless-hackathon-backend.git
 ```bash
 cd "DIRECTORY_NAME"
 ```
+
 * Install serverless globally
 ```bash
 npm install -g serverless
@@ -23,22 +24,19 @@ npm install -g serverless
 npm install
 ```
 
-* Initialize project and follow instructions
-```json
-serverless project init
+* It not already configured, configure your AWS provider credentials as described here: https://git.io/v64aN
+
+* Deploy your serverless service
+```bash
+serverless deploy
 ```
 
-* Delpoy your's lambdas and enpoints
+* Running tests
 ```bash
-serverless dash deploy
-```
-or
-```bash
-serverless function deploy --all
-serverless endpoint deploy --all
+npm test
 ```
 
-#### Enjoy, your ready to go!
+#### Enjoy, you're ready to go!
 
 # Feedback
 mikael.puittinen@sc5.io
