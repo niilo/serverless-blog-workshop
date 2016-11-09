@@ -1,0 +1,82 @@
+service: serverless-blog-workshop-ref # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+      - dynamodb:*
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+    - Effect: Allow
+      Action:
+      - SNS:*
+      Resource: arn:aws:sns:${self:provider.region}:*:*
+package:
+  exclude:
+    - test/**
+    - .git/**
+
+functions:
+  posts:
+    handler: posts/index.handler
+    events:
+      - http:
+          path: posts
+          method: get
+          cors: true
+          integration: lambda
+      - http:
+          path: posts
+          method: post
+          cors: true
+          integration: lambda
+      - http:
+          path: posts/{id}
+          method: put
+          cors: true
+          integration: lambda
+      - http:
+          path: posts/{id}
+          method: delete
+          cors: true         
+          integration: lambda
+
+plugins:
+  - serverless-mocha-plugin
+  - serverless-webpack
+  - serverless-offline
+
+resources:
+  Resources:
+# DynamoDB Blog table for workshop
+    BlogTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain      
+      Properties:        
+        AttributeDefinitions:          
+          -            
+            AttributeName: id            
+            AttributeType: S        
+        KeySchema:          
+          - 
+            AttributeName: id            
+            KeyType: HASH        
+        ProvisionedThroughput:              
+          ReadCapacityUnits: 1          
+          WriteCapacityUnits: 1        
+        TableName: ${self:service}-blog-${opt:stage, self:provider.stage}
+#    SessionsTable:
+#      Type: AWS::DynamoDB::Table
+#      DeletionPolicy: Delete
+#      Properties:
+#        AttributeDefinitions:
+#          - AttributeName: id
+#            AttributeType: S
+#        KeySchema:
+#          - AttributeName: id
+#            KeyType: HASH
+#        ProvisionedThroughput:
+#          ReadCapacityUnits: 1
+#          WriteCapacityUnits: 1
+#        TableName: ${self:service}-sessions-${opt:stage, self:provider.stage}
