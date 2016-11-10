@@ -1,34 +1,107 @@
-# SC5 Serverless Boilerplate
+# Serverless Blog Workshop by SC5
 
-sc5-serverless-boilerplate is a project template for new serverless services. Contents of the template:
-* plugin [serverless-mocha-plugin](https://github.com/SC5/serverless-mocha-plugin): enable test driven development using mocha, creation of functions from command line
-* plugin [serverless-offline] (https://github.com/dherault/serverless-offline): enable endpoint create from cli
-* plugin [serverless-webpack] (https://github.com/elastic-coders/serverless-webpack): enable endpoint create from cli
-* file `serverless.yml.json`: Register plugins above
-* file `webpack.config.js`: Settings for webpack-plugin
+Example backend project for AWS - Serverless hackathon.
 
-## Creating new project
+Project is compatible with Serverless v1
 
-A new project based on the project template is initialized with the command
+## Step by Step instructions for building
 
-```
+### Setup project
+
+* Create the service from the `sc5-serverless-boilerplate`
+```bash
 > sls install -u https://github.com/SC5/sc5-serverless-boilerplate
-> mv sc5-serverless-boilerplate myservicename
-> cd myservicename
-> perl -pi -e "s/sc5-serverless-boilerplate/myservicename/" serverless.yml package.json
+> mv sc5-serverless-boilerplate serverless-blog
+> cd serverless-blog
 > npm install
 ```
 
+* Update the service name in `serverless.yml`
 
-## TODO
+### Set up storage (DynamoDB)
 
-Please see project GitHub [issue tracker](https://github.com/SC5/sc5-serverless-boilerplate/issues).
+* Un-comment `Resources:` and `resources:` in `serverless.yml`.
 
-## Release History
+```
+# DynamoDB Blog table for workshop
+    BlogTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain      
+      Properties:        
+        AttributeDefinitions:          
+          -            
+            AttributeName: id            
+            AttributeType: S        
+        KeySchema:          
+          - 
+            AttributeName: id            
+            KeyType: HASH        
+        ProvisionedThroughput:              
+          ReadCapacityUnits: 1          
+          WriteCapacityUnits: 1        
+        TableName: ${stage}-${serviceName}-blog
+```
 
-* 2016/11/02 - v1.0.0 - Initial version for Serverless 1.0
+### Create function and endpoints
 
-## License
+* Create the function
+```bash
+sls create function -f posts --handler posts/index.handler
+```
 
-Copyright (c) 2016 [SC5](http://sc5.io/), licensed for users and contributors under MIT license.
-https://github.com/sc5/sc5-serverless-boilerplate/blob/master/LICENSE-MIT
+* Register HTTP endpoints by adding the following to the function definition in `serverless.yml`
+```
+    events:
+      - http:
+          path: posts
+          method: get          
+          cors: true
+          integration: lambda
+      - http:
+          path: posts
+          method: posts
+          cors: true
+          integration: lambda
+       - http:
+          path: posts/{id}
+          method: put
+          cors: true
+          integration: lambda
+      - http:
+          path: posts/{id}
+          method: delete
+          cors: true
+          integration: lambda
+```
+
+### Implement the functionality
+
+* Copy `posts/index.js` and `posts/BlogStorage.js` from this repo to your service (`posts` folder)
+
+### Deploy and test
+
+* Deploy the resources (and functions) using
+
+```
+sls deploy
+````
+
+* Copy tests from `test/posts.js` in this repo to your service
+* Run `serveless-mocha-plugin` tests
+
+```
+sls invoke test --region us-east-1 --stage dev
+```
+
+### Set up your blog application
+
+* Launch the blog application
+* Enter the service Url (https://..../posts). The service URL can be retrieved using
+```
+sls info
+```
+
+#### Enjoy, your ready to go!
+
+# Feedback
+mikael.puittinen@sc5.io
