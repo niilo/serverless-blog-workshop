@@ -1,14 +1,12 @@
 'use strict';
 
-// Set the env vars for the function
-require('../lib/envVars').config();
-
 const BlogStorage = require('./BlogStorage');
 const AWS = require('aws-sdk');
 
 const config = {
   region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1',
 };
+
 const dynamodb = new AWS.DynamoDB.DocumentClient(config);
 
 module.exports.handler = (event, context, cb) => {

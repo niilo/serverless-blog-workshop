@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const yaml = require('node-yaml');
+const nodeExternals = require('webpack-node-externals');
 
 function getFunctions() {
   const serverlessYml = yaml.readSync('serverless.yml');
@@ -8,7 +9,7 @@ function getFunctions() {
   const functionNames = Object.keys(serverlessYml.functions || {});
   functionNames.map((name) => {
     const handlerFile = serverlessYml.functions[name].handler.replace(/\.[^\.]*$/, '');
-    webPackFunctions[handlerFile] = `./${handlerFile}.js`;
+    webPackFunctions[handlerFile] = [`./${handlerFile}.js`];
   });
   return webPackFunctions;
 }
@@ -31,4 +32,5 @@ module.exports = {
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js',
   },
+  externals: [nodeExternals()],
 };
