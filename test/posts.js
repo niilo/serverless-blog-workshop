@@ -9,13 +9,10 @@ const mochaPlugin = require('serverless-mocha-plugin');
 const wrapper = mochaPlugin.lambdaWrapper;
 const expect = mochaPlugin.chai.expect;
 
-// process.env.SERVERLESS_STAGE = 'dev';
-// process.env.SERVERLESS_PROJECT = 'mpu-serverless-blog';
-
 const wrapped = wrapper.wrap(mod, { handler: 'handler' });
 
 describe('posts', () => {
-  let postId;
+  let post;
   it('creates a post', (done) => {
     wrapped.run({
       method: 'POST',
@@ -28,8 +25,49 @@ describe('posts', () => {
         return done(err);
       }
 
-      postId = response.post.id;
-      expect(response.post.id).to.be.not.null;
+      post = response.post;
+      expect(post.id).to.be.not.null;
+      expect(err).to.be.null;
+      return done();
+    });
+  });
+
+  it('updates the post', (done) => {
+    wrapped.run({
+      method: 'PUT',
+      path: {
+        id: post.id,
+      },
+      body: {
+        title: 'Test post edited',
+        content: 'Test content edited',
+        date: post.date,
+      },
+    }, (err, response) => {
+      if (err) {
+        return done(err);
+      }
+
+      post = response.post;
+      expect(post.id).to.be.not.null;
+      expect(err).to.be.null;
+      return done();
+    });
+  });
+
+  it('updates the post', (done) => {
+    wrapped.run({
+      method: 'GET',
+    }, (err, response) => {
+      if (err) {
+        return done(err);
+      }
+
+      const createdPost = response.Items.filter(item => item.id === post.id)[0];
+      expect(createdPost.id).to.be.equal(post.id);
+      expect(createdPost.title).to.be.equal('Test post edited');
+      expect(createdPost.content).to.be.equal('Test content edited');
+      expect(createdPost.date).to.be.equal(post.date);
       expect(err).to.be.null;
       return done();
     });
@@ -39,7 +77,7 @@ describe('posts', () => {
     wrapped.run({
       method: 'DELETE',
       path: {
-        id: postId,
+        id: post.id,
       },
     }, (err) => {
       expect(err).to.be.null;
