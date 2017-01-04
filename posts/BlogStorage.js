@@ -1,17 +1,16 @@
 'use strict';
 
 class BlogStorage {
-
-  constructor(dynamodb, serviceName, stage) {
+  constructor(dynamodb) {
     this.dynamodb = dynamodb;
     this.baseParams = {
-      TableName: `${serviceName}-blog-${stage}`,
+      TableName: process.env.TABLE_NAME,
     };
   }
 
   // Get all posts
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
-  getPosts(query, cb) { 
+  getPosts(query, cb) {
     const params = Object.assign({}, this.baseParams, {
       AttributesToGet: [
         'id',
