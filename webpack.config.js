@@ -7,8 +7,8 @@ function getFunctions() {
   const serverlessYml = yaml.readSync('serverless.yml');
   const webPackFunctions = {};
   const functionNames = Object.keys(serverlessYml.functions || {});
-  functionNames.map((name) => {
-    const handlerFile = serverlessYml.functions[name].handler.replace(/\.[^\.]*$/, '');
+  functionNames.forEach((name) => {
+    const handlerFile = serverlessYml.functions[name].handler.replace(/.[^.]*$/, '');
     webPackFunctions[handlerFile] = [`./${handlerFile}.js`];
   });
   return webPackFunctions;

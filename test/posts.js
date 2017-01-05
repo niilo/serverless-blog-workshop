@@ -13,26 +13,20 @@ const wrapped = wrapper.wrap(mod, { handler: 'handler' });
 
 describe('posts', () => {
   let post;
-  it('creates a post', (done) => {
+
+  it('creates a post', () =>
     wrapped.run({
       method: 'POST',
       body: {
         title: 'Test post',
         content: 'Test content',
       },
-    }, (err, response) => {
-      if (err) {
-        return done(err);
-      }
-
+    }).then((response) => {
       post = response.post;
-      expect(post.id).to.be.not.null;
-      expect(err).to.be.null;
-      return done();
-    });
-  });
+      expect(post.id).not.to.be.equal(null);
+    }));
 
-  it('updates the post', (done) => {
+  it('updates the post', () =>
     wrapped.run({
       method: 'PUT',
       path: {
@@ -43,45 +37,35 @@ describe('posts', () => {
         content: 'Test content edited',
         date: post.date,
       },
-    }, (err, response) => {
-      if (err) {
-        return done(err);
-      }
-
+    }).then((response) => {
       post = response.post;
-      expect(post.id).to.be.not.null;
-      expect(err).to.be.null;
-      return done();
-    });
-  });
+      expect(post.id).not.to.be.equal(null);
+    }));
 
-  it('updates the post', (done) => {
+  it('gets the post', () =>
     wrapped.run({
       method: 'GET',
-    }, (err, response) => {
-      if (err) {
-        return done(err);
-      }
-
+    }).then((response) => {
       const createdPost = response.Items.filter(item => item.id === post.id)[0];
       expect(createdPost.id).to.be.equal(post.id);
       expect(createdPost.title).to.be.equal('Test post edited');
       expect(createdPost.content).to.be.equal('Test content edited');
       expect(createdPost.date).to.be.equal(post.date);
-      expect(err).to.be.null;
-      return done();
-    });
-  });
+    }));
 
-  it('deletes a post', (done) => {
+  it('deletes a post', () =>
     wrapped.run({
       method: 'DELETE',
       path: {
         id: post.id,
       },
-    }, (err) => {
-      expect(err).to.be.null;
-      return done();
-    });
-  });
+    }));
+
+  it('checks that the post is deleted', () =>
+    wrapped.run({
+      method: 'GET',
+    }).then((response) => {
+      const createdPost = response.Items.filter(item => item.id === post.id);
+      expect(createdPost).to.be.eql([]);
+    }));
 });

@@ -10,7 +10,7 @@ class BlogStorage {
 
   // Get all posts
   // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
-  getPosts(query) {
+  getPosts() {
     const params = Object.assign({}, this.baseParams, {
       AttributesToGet: [
         'id',
