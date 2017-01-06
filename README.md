@@ -10,13 +10,10 @@ Project is compatible with Serverless v1
 
 * Create the service from the `sc5-serverless-boilerplate`
 ```bash
-> sls install -u https://github.com/SC5/sc5-serverless-boilerplate
-> mv sc5-serverless-boilerplate serverless-blog
+> sls install -u https://github.com/SC5/sc5-serverless-boilerplate -n serverless-blog
 > cd serverless-blog
 > npm install
 ```
-
-* Update the service name in `serverless.yml`
 
 ### Set up storage (DynamoDB)
 
@@ -26,20 +23,18 @@ Project is compatible with Serverless v1
 # DynamoDB Blog table for workshop
     BlogTable:
       Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain      
-      Properties:        
-        AttributeDefinitions:          
-          -            
-            AttributeName: id            
-            AttributeType: S        
-        KeySchema:          
-          - 
-            AttributeName: id            
-            KeyType: HASH        
-        ProvisionedThroughput:              
-          ReadCapacityUnits: 1          
-          WriteCapacityUnits: 1        
-        TableName: ${stage}-${serviceName}-blog
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.TABLE_NAME}
 ```
 
 ### Create function and endpoints
