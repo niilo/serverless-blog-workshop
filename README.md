@@ -4,7 +4,7 @@ Example backend project for AWS - Serverless hackathon.
 
 Project is compatible with Serverless v1
 
-## Step by Step instructions for building
+## Step by step instructions for building the project with Serverless Framework v1.5
 
 ### Setup project
 
