@@ -16,7 +16,9 @@
     "type": "git",
     "url": "https://github.com/SC5/mpu-serverless-blog.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rss": "^1.2.1"
+  },
   "devDependencies": {
     "aws-sdk": "^2.7.10",
     "copy-webpack-plugin": "^3.0.1",
