@@ -8,9 +8,9 @@ Project is compatible with Serverless v1
 
 ### Setup project
 
-* Create the service from the `sc5-serverless-boilerplate`
+* Create the service from the `sc5-serverless-boilerplate`, change name my-serverless-blog to something unique:
 ```bash
-> sls install -u https://github.com/SC5/sc5-serverless-boilerplate -n serverless-blog
+> sls install -u https://github.com/SC5/sc5-serverless-boilerplate -n my-serverless-blog
 > cd serverless-blog
 > npm install
 ```
