@@ -54,7 +54,7 @@ sls create function -f posts --handler posts/index.handler
           integration: lambda
       - http:
           path: posts
-          method: posts
+          method: post
           cors: true
           integration: lambda
       - http:
