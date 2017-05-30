@@ -15,6 +15,17 @@ Project is compatible with Serverless v1
 > npm install
 ```
 
+### Set up AWS profile and default region
+
+Add defalt profile and region configuration to provider definition:
+
+```
+provider:
+  ...
+  profile: at-dev-aws
+  region: eu-west-1
+```
+
 ### Set up storage (DynamoDB)
 
 * Un-comment `Resources:` and `resources:` in `serverless.yml`.
