@@ -28,6 +28,12 @@ You should get your IAM account data.
 
 ## Step by step instructions for building the project with Serverless Framework v1.5
 
+### Install serverless
+
+```bash
+npm install -g serverless
+```
+
 ### Setup project
 
 * Create the service from the `sc5-serverless-boilerplate`, change name my-serverless-blog to something unique:
