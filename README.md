@@ -45,7 +45,7 @@ npm install -g serverless
 
 ### Set up AWS profile and default region
 
-Add defalt profile and region configuration to `serverless.yaml` provider definition:
+Add defalt profile and region configuration to `serverless.yml` provider definition:
 
 ```
 provider:
@@ -59,10 +59,11 @@ provider:
 * Un-comment `Resources:` and `resources:` in `serverless.yml`.
 
 ```
-# DynamoDB Blog table for workshop
-    BlogTable:
+resources:
+  Resources:
+    SessionsTable:
       Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
+      DeletionPolicy: Delete
       Properties:
         AttributeDefinitions:
           - AttributeName: id
