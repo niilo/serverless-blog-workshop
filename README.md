@@ -219,6 +219,8 @@ cd my-serverless-blog-frontend
 npm install
 ```
 
+Change npm package name `package.json` to match project name `my-serverless-blog-frontend`
+
 Configure Blog backend `https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/dev/posts` url by editting `app/config.ts` file.
 
 You can get your Serverless backend url using command `sls info` in backend-project folder.
