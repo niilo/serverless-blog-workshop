@@ -239,13 +239,24 @@ To create bucket to custom region with custom CloudFormation stack name, use par
 npm run deploy-stack -- -r eu-west-1 -n my-serverless-blog-frontend
 ```
 
-* Remove from S3
+* Check that frontend works with backend
+
+deploy-stack command returns website url. Browse there and you shold see one blog post :)
+
+* Remove from S3 (after workshop)
 
 ```bash
 npm run remove-stack
 ```
 
 If you've defined custom region or stack name, same -r and -n parameters should be used when removing application.
+
+### Implement missing functionality
+
+Switch to backend and add missing functionality to `posts/BlogStorage.js` and `posts/index.js`.
+
+You can develop frontend with offline Serverless by just starting backend with `sls offline` and configuring frontend to connect local backend edit `app/config.ts` to point `http://localhost:3000/posts` then you can start frontend locally with `npm start`
+
 
 ### Test
 
@@ -257,12 +268,20 @@ If you've defined custom region or stack name, same -r and -n parameters should 
 sls invoke test --region us-east-1 --stage dev
 ```
 
-### Set up your blog application
+### Cleanup
 
-* Launch the blog application
-* Enter the service Url (https://..../posts). The service URL can be retrieved using
+* Remove serverless backend:
+
+```bash
+sls remove
 ```
-sls info
+
+* Delete frontend:
+
+You might need to use -r -n options if stack was created with them..
+
+```bash
+npm run remove-stack
 ```
 
 #### Enjoy, your ready to go!
