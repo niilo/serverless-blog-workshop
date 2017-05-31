@@ -188,7 +188,7 @@ module.exports.handler = (event, context, callback) => {
 };
 ```
 
-### Deploy and test
+### Run offline and redeploy
 
 * Run offline
 
@@ -208,6 +208,24 @@ You should get previously created blog post from DynamoDB
 ```
 sls deploy
 ````
+
+### Fast forward with frontend
+
+Replace `my-`with your name or nick:
+
+```bash
+git clone git@github.com:niilo/aws-serverless-hackathon.git my-serverless-blog-frontend
+cd my-serverless-blog-frontend
+npm install
+```
+
+Configure Blog backend `https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/dev/posts` url by editting `app/config.ts` file.
+
+You can get your Serverless backend url using command `sls info` in backend-project folder.
+
+
+### Test
+
 
 * Copy tests from `test/posts.js` in this repo to your service
 * Run `serveless-mocha-plugin` tests
