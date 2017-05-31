@@ -5,9 +5,9 @@
 Open AWS Console / Lambda
 - Create new function
 - Name: ”Calculator”
-- Copy code from the right
+- Copy code from the below
 - Role: Create new role ”Basic execution role”
-- Once created, test with e.g. sample test from the right
+- Once created, test with e.g. sample test below
 - Logs available in Cloudwatch
 
 LAMBDA:
