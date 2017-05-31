@@ -265,12 +265,6 @@ You can get your Serverless backend url using command `sls info` in backend-proj
 
 * To deploy frontend web application to S3 run
 
-```bash
-npm run deploy-stack
-```
-
-which creates a S3 bucket with website hosting to your default region.
-
 To create bucket to custom region with custom CloudFormation stack name, use parameter -r for region and -n for stack name e.g.
 
 ```bash
@@ -284,7 +278,7 @@ deploy-stack command returns website url. Browse there and you shold see one blo
 * Remove from S3 (after workshop)
 
 ```bash
-npm run remove-stack
+npm run remove-stack -- -r eu-west-1 -n my-serverless-blog-frontend
 ```
 
 If you've defined custom region or stack name, same -r and -n parameters should be used when removing application.
