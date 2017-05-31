@@ -4,6 +4,11 @@ Example backend project for AWS - Serverless hackathon.
 
 Project is compatible with Serverless v1
 
+## Prerequistes:
+
+Node 6.x - `node --version`
+AWS CLI 1.11.x - `aws --version`
+
 ## Test AWS settings
 
 ```bash
