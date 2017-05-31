@@ -31,7 +31,7 @@ TEST:
 
 ## API GATEWAY EXAMPLE
 
-Launch API Gateway from AWS Console
+Launch API Gateway from AWS Console:
 - Create API ”Calculator”
 - Create resourse ”calculator” (from Actions)
 - Create ”POST” method for calculator resource

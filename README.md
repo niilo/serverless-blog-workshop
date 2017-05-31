@@ -82,9 +82,114 @@ sls create function -f posts --handler posts/index.handler
 
 ### Implement the functionality
 
-* Copy `posts/index.js` and `posts/BlogStorage.js` from this repo to your service (`posts` folder)
+#### Create blog post to DynamoDB
+
+```json
+{
+  "content": "Tässä hienon blogipostauksen alku...\n",
+  "date": 1496153248516,
+  "id": "1496153248516",
+  "title": "Eka postaus"
+}
+```
+
+#### Create BlogStorage.js on posts folder:
+
+Edit `posts/BlogStorage.js`:
+
+```javascript
+'use strict';
+
+class BlogStorage {
+  constructor(dynamodb) {
+    this.dynamodb = dynamodb;
+    this.baseParams = {
+      TableName: process.env.TABLE_NAME,
+    };
+  }
+
+  // Get all posts
+  // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
+  getPosts() {
+    const params = Object.assign({}, this.baseParams, {
+      AttributesToGet: [
+        'id',
+        'title',
+        'content',
+        'date',
+      ],
+    });
+
+    return this.dynamodb.scan(params).promise();
+  }
+
+  // Add new post
+  // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
+  savePost(post) {
+    return { post: '' }
+  }
+
+  // Edit post
+  // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
+  updatePost(id, post) {
+    return { post: '' }
+  }
+
+  // Delete post
+  // @see: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#delete-property
+  deletePost(id) {
+    return { post: '' }
+  }
+}
+
+module.exports = BlogStorage;
+```
+
+#### Implement get for posts
+
+Edit `posts/index.js`:
+
+```javascript
+'use strict';
+
+const BlogStorage = require('./BlogStorage');
+const AWS = require('aws-sdk');
+
+const config = {
+  region: AWS.config.region || process.env.SERVERLESS_REGION || 'eu-west-1',
+};
+
+const dynamodb = new AWS.DynamoDB.DocumentClient(config);
+
+module.exports.handler = (event, context, callback) => {
+  const storage = new BlogStorage(dynamodb);
+
+  switch (event.method) {
+    case 'GET':
+      storage.getPosts({})
+        .then(response => callback(null, response))
+        .catch(callback);
+      break;
+    default:
+      callback(`Unknown method "${event.method}".`);
+  }
+};
+```
 
 ### Deploy and test
+
+* Run offline
+
+Run serverless locally:
+
+```bash
+sls offline
+```
+
+Curl or browse to `http://localhost:3000/posts`
+
+You should get previously created blog post from DynamoDB
+
 
 * Deploy the resources (and functions) using
 
