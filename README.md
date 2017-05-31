@@ -4,6 +4,10 @@ Example backend project for AWS - Serverless hackathon.
 
 Project is compatible with Serverless v1
 
+## Intro
+
+https://www.slideshare.net/mpuittinen/helsinki-serverless-meetup-1562016-aws-services
+
 ## Prerequistes:
 
 Node 6.x - `node --version`
