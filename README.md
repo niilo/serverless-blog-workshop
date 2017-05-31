@@ -284,6 +284,21 @@ You might need to use -r -n options if stack was created with them..
 npm run remove-stack
 ```
 
+### Next steps:
+
+Serverless BEER:
+https://www.netlify.com/blog/2016/09/15/serverless-jam---a-serverless-framework-tutorial/
+https://www.netlify.com/blog/2016/10/13/serverless-jam---a-serverless-framework-tutorial-part-2/
+
+Official examples:
+https://github.com/serverless/examples
+
+Accenture TechArch serverless workshop:
+https://github.com/niilo/tad2017
+
+And the best for last?
+http://serverless-stack.com/
+
 #### Enjoy, your ready to go!
 
 # Feedback
