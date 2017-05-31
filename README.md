@@ -11,7 +11,7 @@ Project is compatible with Serverless v1
 * Create the service from the `sc5-serverless-boilerplate`, change name my-serverless-blog to something unique:
 ```bash
 > sls install -u https://github.com/SC5/sc5-serverless-boilerplate -n my-serverless-blog
-> cd serverless-blog
+> cd my-serverless-blog
 > npm install
 ```
 
@@ -53,6 +53,18 @@ provider:
 * Create the function
 ```bash
 sls create function -f posts --handler posts/index.handler
+```
+
+* Deploy
+
+```bash
+sls deploy
+```
+
+* Invoke/test deplyed function:
+
+```bash
+sls invoke -f posts
 ```
 
 * Register HTTP endpoints by adding the following to the function definition in `serverless.yml`
