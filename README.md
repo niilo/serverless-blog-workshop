@@ -225,6 +225,27 @@ Configure Blog backend `https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/d
 
 You can get your Serverless backend url using command `sls info` in backend-project folder.
 
+* To deploy frontend web application to S3 run
+
+```bash
+npm run deploy-stack
+```
+
+which creates a S3 bucket with website hosting to your default region.
+
+To create bucket to custom region with custom CloudFormation stack name, use parameter -r for region and -n for stack name e.g.
+
+```bash
+npm run deploy-stack -- -r eu-west-1 -n my-serverless-blog-frontend
+```
+
+* Remove from S3
+
+```bash
+npm run remove-stack
+```
+
+If you've defined custom region or stack name, same -r and -n parameters should be used when removing application.
 
 ### Test
 
