@@ -45,7 +45,7 @@ npm install -g serverless
 
 ### Set up AWS profile and default region
 
-Add defalt profile and region configuration to provider definition:
+Add defalt profile and region configuration to `serverless.yaml` provider definition:
 
 ```
 provider:
