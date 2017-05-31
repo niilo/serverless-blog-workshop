@@ -4,6 +4,28 @@ Example backend project for AWS - Serverless hackathon.
 
 Project is compatible with Serverless v1
 
+## Test AWS settings
+
+```bash
+mkdir awstest
+cd awstest
+npm install aws-sdk
+node awstest.js
+```
+
+paste following:
+
+```javascript
+var AWS = require('aws-sdk')
+var IAM = new AWS.IAM()
+IAM.getUser(function (err, data) {
+  console.log(data)
+})
+```
+
+You should get your IAM account data.
+
+
 ## Step by step instructions for building the project with Serverless Framework v1.5
 
 ### Setup project
